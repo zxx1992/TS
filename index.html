@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box">box</div>
+    <script>
+        // es5 
+        function Person(name,age) {
+            this.name = name;
+            this.age = age;
+            this.run = function() {
+                console.log("fangfa")
+            }
+        }
+        Person.prototype.sex = 'nan';
+        Person.prototype.run3 = function() {
+            console.log("fangfa2")
+        };
+        Person.getInfo = function() {
+            console.log("jingtaifangfa  不会被实例继承")
+        }
+        var p = new Person("zxx",28);
+        p.run();
+        p.run3();
+        // p.getInfo();
+        Person.getInfo();
+        console.log(p.name, p.age,p.sex, 'es5lei')
+
+        // 继承： 原型链继承，构造函数继承，组合继承
+        function Web(name,age) {
+            Person.call(this, name,age);//对象冒充实现继承
+        }
+
+
+        Web.prototype = new Person();//原型链实现继承:只能继承原型链上面的属性，方法
+        var w = new Web("lcc",29)
+        var w1 = new Web("lcc2",290)
+        console.log(w.name, w.age,w.sex, '对象冒充实现继承,无法继承原型链上面的属性和方法')
+        w.run3();
+    </script>
+</body> 
+
+</html>
+<!-- 这里js里面需要获取dom节点，所以需要放在dom后面 -->
+<script src="./js/index.js"></script>
